@@ -23,8 +23,5 @@ app.use((error, req, res, next) => {
   res.status(500).send("An Error Occurred" + error)
 })
 
-app.delete("/employees/:id").delete((req, res) =>{
-    const deleted = await deleteEmployee(req.params.id)
-    if(!deleted) return res.status(404).send("Employee noot found")
-})
+
 export default app
