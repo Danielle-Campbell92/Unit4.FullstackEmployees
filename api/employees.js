@@ -24,10 +24,6 @@ employees.push(employee)
 res.status(201).send(`Added the employee ${employee}`)
 })
 
-router.route("/random").get((req, res) => {
-    const randomIndex = Math.floor(Math.random() * employees.length);
-    res.send(employees[randomIndex]);
-  });
   
 router.route("/:id").get((req, res) => {
     const { id } = req.params;

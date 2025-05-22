@@ -1,5 +1,30 @@
 import express from "express";
+import employeeRouter from "#api/employees.js"
+import { deleteEmployee } from "#db/queries/employees";
 const app = express();
-export default app;
 
-// TODO: this file!
+app.use(express.json())
+
+app.use((req,res, next) => {
+  console.log(req.method, req.originalUrl)
+  next()
+})
+
+app.route("/").get((req, res) => {
+  console.log("Dani")
+  res.send("Hello employees!");
+  
+});
+
+app.use("/employees", employeeRouter)
+
+app.use((error, req, res, next) => {
+  console.log(error)
+  res.status(500).send("An Error Occurred" + error)
+})
+
+app.delete("/employees/:id").delete((req, res) =>{
+    const deleted = await deleteEmployee(req.params.id)
+    if(!deleted) return res.status(404).send("Employee noot found")
+})
+export default app
