@@ -15,7 +15,7 @@ router.route("/").post(async (req, res) => {
         return res.status(400).send({error: "Missing req.body"})
     }
     const {name, birthday, salary} = req.body
-    if(!name || !birthday || !salry){
+    if(!name || !birthday || !salary){
         return res.status (400).send({error: "Missing require params"})
     }
     const employee = await createEmployee({name, birthday, salary})
